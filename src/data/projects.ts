@@ -140,26 +140,6 @@ export const PROJECTS_DATA: Project[] = [
     ],
     results: '100% das unidades comercializadas em menos de 45 dias do lançamento.',
     image: '/src/assets/images/project_luxury_branding_1790951222099.jpg'
-  },
-  {
-    id: 'valente-advocacia',
-    title: 'Valente & Associados',
-    category: 'digital',
-    categoryLabel: 'Plataformas & UI/UX',
-    year: '2025',
-    client: 'Boutique Jurídica de Direito Societário',
-    summary: 'Ecossistema digital institucional com biblioteca de artigos, design sério, sóbrio e tipografia marcante.',
-    description: 'Renovação do posicionamento digital de um dos mais tradicionais escritórios societários. A interface prioriza autoridade imediata, leitura confortável de pareceres jurídicos e contato confidencial direto.',
-    challenge: 'Modernizar a presença online sem perder a tradição e a sobriedade jurídica conquistadas em 3 décadas.',
-    solution: 'Tipografia serifada de alto contraste, fundo café escuro e seções com transições suaves que transmitem solidez institucional.',
-    deliverables: [
-      'Arquitetura de conteúdo e UX writing',
-      'Interface institucional e portal de publicações',
-      'Criptografia de formulário de consultas preliminares',
-      'Otimização SEO de alto desempenho'
-    ],
-    results: 'Aumento de 80% nos contatos de novos clientes corporativos qualificados.',
-    image: '/src/assets/images/project_digital_platform_1790951243333.jpg'
   }
 ];
 
