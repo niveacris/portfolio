@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Cinzel", "Cormorant Garamond", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  /* Requested Palette Tokens */
+  --bg-canvas: #FFFFFF;
+  --bg-section-alt: #F5F5F5;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  
+  --border-subtle: #E8E8E8;
+  --border-gold: #D4AF37;
+  --border-gold-soft: rgba(212, 175, 55, 0.35);
+
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-muted: #757575;
+
+  /* Primária: Rosê suave */
+  --accent-rose: #E8C7C8;
+  --accent-rose-soft: #F4D3D5;
+  --accent-rose-light: #FBF0F1;
+
+  /* Secundária: Dourado metálico */
+  --accent-gold: #C9A646;
+  --accent-gold-metallic: #D4AF37;
+  --accent-gold-dark: #9E7D2B;
+
+  /* Interações */
+  --btn-primary-bg: #E8C7C8;
+  --btn-primary-text: #1A1A1A;
+  --btn-primary-hover-bg: #D4AF37;
+  --btn-primary-hover-text: #FFFFFF;
+}
+
+/* Custom smooth styles */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+/* Dourado metálico para títulos e destaques */
+.gold-heading {
+  color: #C9A646;
+}
+
+.gold-metallic-text {
+  background: linear-gradient(135deg, #A8842E 0%, #D4AF37 35%, #8C6A1E 70%, #C9A646 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Botões e links: rosê com hover em dourado */
+.btn-rose-gold {
+  background-color: #E8C7C8;
+  color: #1A1A1A;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-rose-gold:hover {
+  background-color: #D4AF37;
+  color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+}
+
+.link-rose-gold {
+  color: #1A1A1A;
+  transition: color 0.2s ease;
+}
+.link-rose-gold:hover {
+  color: #C9A646;
+}
+
+/* Molduras em dourado */
+.gold-frame {
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+.gold-frame-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gold-frame-hover:hover {
+  border-color: #D4AF37;
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8C7C8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
