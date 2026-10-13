@@ -134,20 +134,19 @@ export const LogoShowcase: React.FC<LogoShowcaseProps> = ({ onOpenWhatsApp }) =>
                   </div>
                 ) : (
                   <div
-                    className="relative z-10 text-center transition-transform duration-200"
+                    className="relative z-10 text-center transition-transform duration-200 flex flex-col items-center justify-center max-w-[90%]"
                     style={{ transform: `scale(${logoScale / 100})` }}
                   >
-                    {/* Default Elegant Monogram Stamp */}
-                    <div className="inline-block p-6 rounded-full border border-[#D4AF37]/60 mb-3 bg-[#FFFFFF]/80 backdrop-blur-sm shadow-sm">
-                      <span className="font-serif text-5xl sm:text-6xl font-light tracking-[0.25em] text-[#C9A646] pl-2">
-                        NO
+                    {/* Official Nívea Oliveira Transparent Logo */}
+                    <div className="relative mb-2 group flex items-center justify-center px-4">
+                      <img
+                        src="/src/assets/images/logo_nivea_oliveira_transparente.png"
+                        alt="Logo Oficial Nívea Oliveira"
+                        className="max-h-[130px] sm:max-h-[160px] w-auto object-contain filter drop-shadow-md"
+                      />
+                      <span className="absolute -top-3 right-2 bg-[#C9A646] text-white text-[9px] uppercase font-semibold px-2 py-0.5 rounded-full tracking-wider shadow-xs">
+                        Logo Oficial
                       </span>
-                    </div>
-                    <div className="font-serif text-xl sm:text-2xl tracking-[0.2em] uppercase font-medium">
-                      Nívea Oliveira
-                    </div>
-                    <div className="text-[11px] uppercase tracking-[0.3em] text-[#9E7D2B] mt-1 font-medium">
-                      Atelier de Criação & Marcas
                     </div>
                   </div>
                 )}
@@ -335,13 +334,28 @@ export const LogoShowcase: React.FC<LogoShowcaseProps> = ({ onOpenWhatsApp }) =>
               className="bg-[#FFFFFF] p-6 rounded-lg border border-[#E8E8E8] hover:border-[#D4AF37] transition-all duration-300 flex flex-col justify-between group shadow-xs hover:shadow-md hover:shadow-[#D4AF37]/10"
             >
               <div>
-                {/* Visual Emblem Badge com Moldura Dourada */}
-                <div className="aspect-[16/9] rounded-md bg-[#F5F5F5] border border-[#E8E8E8] flex items-center justify-center mb-5 group-hover:border-[#D4AF37]/50 transition-colors">
-                  <div className="w-16 h-16 rounded-full border border-[#D4AF37]/50 flex items-center justify-center bg-[#FFFFFF] shadow-sm">
-                    <span className="font-serif text-2xl font-light text-[#C9A646] tracking-wider">
-                      {logo.symbol}
-                    </span>
-                  </div>
+                {/* Visual Emblem Badge com Moldura Dourada ou Imagem Oficial */}
+                <div className="relative aspect-[16/9] rounded-md bg-[#F5F5F5] border border-[#E8E8E8] flex items-center justify-center mb-5 group-hover:border-[#D4AF37]/50 transition-colors overflow-hidden">
+                  {logo.image ? (
+                    <div className="relative w-full h-full flex items-center justify-center p-3 bg-[#FFFFFF]">
+                      <img
+                        src={logo.image}
+                        alt={logo.name}
+                        className="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300"
+                      />
+                      {logo.isOfficial && (
+                        <span className="absolute top-2.5 right-2.5 bg-[#C9A646] text-white text-[9px] uppercase font-semibold px-2 py-0.5 rounded tracking-wider shadow-xs">
+                          Logo Oficial
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 rounded-full border border-[#D4AF37]/50 flex items-center justify-center bg-[#FFFFFF] shadow-sm">
+                      <span className="font-serif text-2xl font-light text-[#C9A646] tracking-wider">
+                        {logo.symbol}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex items-center gap-2 text-xs text-[#757575] tracking-wider uppercase mb-2">

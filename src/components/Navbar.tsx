@@ -35,12 +35,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenWhatsApp }) => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-        {/* Zone 1: Brand Wordmark */}
+        {/* Zone 1: Brand Wordmark & Official Logo */}
         <a
           href="#apresentacao"
-          className="text-lg md:text-xl font-display font-semibold tracking-[0.2em] text-[#1A1A1A] hover:text-[#C9A646] transition-colors uppercase whitespace-nowrap"
+          className="flex items-center gap-3 group py-0.5"
+          aria-label="Nívea Oliveira - Início"
         >
-          Nívea Oliveira
+          <img
+            src="/src/assets/images/logo_nivea_oliveira_transparente.png"
+            alt="Logo oficial Nívea Oliveira"
+            className="h-9 sm:h-11 w-auto max-w-[210px] sm:max-w-[260px] object-contain group-hover:scale-105 transition-transform duration-300"
+          />
+          <span className="sr-only">Nívea Oliveira</span>
         </a>
 
         {/* Zone 2: Navigation Links */}

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowDown, MessageSquare, Mail, Check, Sparkles } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { ArrowDown, MessageSquare, Mail, Check, Sparkles, Camera, Upload, RotateCcw } from 'lucide-react';
 
 interface HeroProps {
   onOpenWhatsApp: () => void;
@@ -8,6 +8,71 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenWhatsApp, emailAddress }) => {
   const [copied, setCopied] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [portraitPhoto, setPortraitPhoto] = useState<string>(() => {
+    try {
+      return (
+        localStorage.getItem('nivea_portrait_photo') ||
+        '/src/assets/images/nivea_oliveira_portrait_official_1791923596017.jpg'
+      );
+    } catch {
+      return '/src/assets/images/nivea_oliveira_portrait_official_1791923596017.jpg';
+    }
+  });
+
+  const [isCustomPhoto, setIsCustomPhoto] = useState<boolean>(() => {
+    try {
+      return !!localStorage.getItem('nivea_portrait_photo');
+    } catch {
+      return false;
+    }
+  });
+
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+  const processPhotoFile = (file: File) => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      if (result) {
+        setPortraitPhoto(result);
+        setIsCustomPhoto(true);
+        try {
+          localStorage.setItem('nivea_portrait_photo', result);
+        } catch {
+          // If storage quota exceeded, remains active in current session state
+        }
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processPhotoFile(file);
+    }
+  };
+
+  const handleDropPhoto = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDraggingOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processPhotoFile(file);
+    }
+  };
+
+  const handleResetPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      localStorage.removeItem('nivea_portrait_photo');
+    } catch {}
+    setPortraitPhoto('/src/assets/images/nivea_oliveira_portrait_official_1791923596017.jpg');
+    setIsCustomPhoto(false);
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress);
@@ -34,13 +99,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWhatsApp, emailAddress }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Editorial Typography & Value Proposition */}
           <div className="lg:col-span-7 space-y-8">
-            {/* Unboxed metadata kicker em Dourado Metálico */}
-            <div className="flex items-center gap-3 text-xs md:text-sm tracking-[0.18em] uppercase text-[#C9A646] font-semibold">
-              <span>Direção Criativa</span>
-              <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>
-              <span>Identidade de Marca</span>
-              <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>
-              <span>Design Editorial</span>
+            {/* Top Logo & Unboxed metadata kicker em Dourado Metálico */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <img
+                src="/src/assets/images/logo_nivea_oliveira_transparente.png"
+                alt="Logo oficial Nívea Oliveira"
+                className="h-14 sm:h-16 w-auto max-w-[220px] sm:max-w-[280px] object-contain shrink-0 hover:scale-105 transition-transform"
+              />
+              <div className="flex flex-wrap items-center gap-2 text-xs md:text-sm tracking-[0.18em] uppercase text-[#C9A646] font-semibold">
+                <span>Direção Criativa</span>
+                <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>
+                <span>Identidade de Marca</span>
+                <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>
+                <span>Design Editorial</span>
+              </div>
             </div>
 
             {/* Display Headline em Preto Profundo com Dourado */}
@@ -137,11 +209,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWhatsApp, emailAddress }) => {
                 aria-hidden="true"
               />
 
-              <div className="relative overflow-hidden rounded-md bg-[#F5F5F5] border border-[#D4AF37]/40 shadow-xl aspect-[3/4]">
+              <div
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  setIsDraggingOver(true);
+                }}
+                onDragLeave={() => setIsDraggingOver(false)}
+                onDrop={handleDropPhoto}
+                className={`relative overflow-hidden rounded-md bg-[#F5F5F5] border shadow-xl aspect-[3/4] group transition-all duration-300 ${
+                  isDraggingOver
+                    ? 'border-[#D4AF37] ring-4 ring-[#D4AF37]/30 scale-[1.01]'
+                    : 'border-[#D4AF37]/40'
+                }`}
+              >
                 <img
-                  src="/src/assets/images/hero_rose_portrait_1790951715484.jpg"
-                  alt="Retrato de Nívea Oliveira em estúdio, diretora de arte e estrategista criativa"
-                  className="w-full h-full object-cover object-center filter contrast-[1.01] transition-transform duration-700 hover:scale-105"
+                  src={portraitPhoto}
+                  alt="Retrato de Nívea Oliveira, diretora de arte e estrategista criativa"
+                  className="w-full h-full object-cover object-center filter contrast-[1.01] transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"
                   loading="eager"
                   onError={(e) => {
@@ -152,6 +236,47 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWhatsApp, emailAddress }) => {
                     }
                   }}
                 />
+
+                {/* Hidden File Input for Real Photo Upload */}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoUpload}
+                />
+
+                {/* Direct Action Button to Upload Real Photo */}
+                <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 opacity-90 hover:opacity-100 transition-opacity">
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    type="button"
+                    title="Substituir pela sua foto original sem alterações"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FFFFFF]/95 hover:bg-[#FFFFFF] text-[#1A1A1A] border border-[#D4AF37] shadow-md text-[11px] font-medium tracking-wide backdrop-blur-sm transition-all hover:scale-105 hover:border-[#B3892B] active:scale-95 cursor-pointer"
+                  >
+                    <Camera className="w-3.5 h-3.5 text-[#C9A646]" />
+                    <span>{isCustomPhoto ? 'Trocar Foto Real' : 'Carregar Foto Real'}</span>
+                  </button>
+
+                  {isCustomPhoto && (
+                    <button
+                      onClick={handleResetPhoto}
+                      type="button"
+                      title="Restaurar padrão"
+                      className="p-1.5 rounded-full bg-[#FFFFFF]/90 hover:bg-[#FFFFFF] text-[#757575] hover:text-[#1A1A1A] border border-[#E0E0E0] shadow-sm text-xs backdrop-blur-sm transition-all cursor-pointer"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                    </button>
+                  )}
+                </div>
+
+                {isDraggingOver && (
+                  <div className="absolute inset-0 bg-[#FFFFFF]/90 backdrop-blur-xs flex flex-col items-center justify-center p-6 text-center z-30 border-2 border-dashed border-[#D4AF37]">
+                    <Upload className="w-8 h-8 text-[#C9A646] mb-2 animate-bounce" />
+                    <p className="text-xs font-semibold text-[#1A1A1A]">Solte sua foto real aqui</p>
+                    <p className="text-[10px] text-[#757575] mt-1">Carrega o arquivo original sem nenhuma alteração</p>
+                  </div>
+                )}
 
                 {/* Subtle light scrim */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/70 via-transparent to-transparent pointer-events-none" />
@@ -165,14 +290,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenWhatsApp, emailAddress }) => {
                 </div>
               </div>
 
-              {/* Discreet floating credibility card */}
-              <div className="absolute -bottom-5 -left-5 bg-[#FFFFFF] border border-[#D4AF37]/40 p-3.5 rounded shadow-lg hidden sm:flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#F4D3D5] flex items-center justify-center text-[#1A1A1A]">
-                  <Sparkles className="w-4 h-4 text-[#C9A646]" />
-                </div>
+              {/* Discreet floating credibility card with official logo */}
+              <div className="absolute -bottom-5 -left-5 bg-[#FFFFFF] border border-[#D4AF37]/50 p-3 rounded-lg shadow-xl hidden sm:flex items-center gap-3">
+                <img
+                  src="/src/assets/images/logo_nivea_oliveira_letradourada_1791316714086.jpg"
+                  alt="Selo oficial Nívea Oliveira"
+                  className="w-10 h-10 rounded-full border border-[#D4AF37]/60 object-cover shadow-xs shrink-0"
+                />
                 <div className="text-left">
-                  <div className="text-xs font-semibold text-[#1A1A1A]">Design Sob Medida</div>
-                  <div className="text-[11px] text-[#757575]">Estética Rosé & Dourado</div>
+                  <div className="text-xs font-semibold text-[#1A1A1A]">Marca d'Água Oficial</div>
+                  <div className="text-[11px] text-[#C9A646] font-medium">Atelier Nívea Oliveira</div>
                 </div>
               </div>
             </div>

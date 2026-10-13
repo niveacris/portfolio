@@ -15,17 +15,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenWhatsApp, emailAddress }) 
     <footer className="bg-[#1A1A1A] border-t border-[#333333] text-[#A0A0A0] py-14">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-[#2C2C2C]">
-          {/* Brand Wordmark em Dourado Metálico */}
-          <div>
-            <a
-              href="#apresentacao"
-              className="text-lg font-display tracking-[0.2em] font-semibold text-[#FFFFFF] hover:text-[#D4AF37] transition-colors uppercase"
-            >
-              Nívea Oliveira
-            </a>
-            <p className="text-xs text-[#D4AF37] mt-1 font-serif tracking-wider">
-              Direção Criativa, Marcas & Design Estratégico
-            </p>
+          {/* Brand Wordmark & Official Logo em Dourado Metálico */}
+          <div className="flex items-center gap-3">
+            <img
+              src="/src/assets/images/logo_nivea_oliveira_transparente.png"
+              alt="Logo oficial Nívea Oliveira"
+              className="h-10 w-auto max-w-[150px] object-contain shrink-0"
+            />
+            <div>
+              <a
+                href="#apresentacao"
+                className="text-lg font-display tracking-[0.2em] font-semibold text-[#FFFFFF] hover:text-[#D4AF37] transition-colors uppercase"
+              >
+                Nívea Oliveira
+              </a>
+              <p className="text-xs text-[#D4AF37] mt-0.5 font-serif tracking-wider">
+                Direção Criativa, Marcas & Design Estratégico
+              </p>
+            </div>
           </div>
 
           {/* Quick Section Links */}

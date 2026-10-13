@@ -16,7 +16,7 @@ export default function App() {
   const [showFloatingTip, setShowFloatingTip] = useState(true);
 
   // Direct contact credentials
-  const emailAddress = 'niveacristinas@gmail.com';
+  const emailAddress = 'cloud.nivc@gmail.com';
   const rawWhatsAppDigits = '5511987654321';
   const displayWhatsApp = '+55 (11) 98765-4321';
 

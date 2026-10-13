@@ -17,24 +17,24 @@ export interface Project {
 
 export const PROJECTS_DATA: Project[] = [
   {
-    id: 'rose-gold-monograms',
-    title: 'Coleção de Identidades & Logos Rosé Gold',
+    id: 'nivea-oliveira-oficial',
+    title: 'Monograma Ouro & Assinatura Rosé Oficial — Nívea Oliveira',
     category: 'branding',
     categoryLabel: 'Identidade & Branding',
     year: '2026',
-    client: 'Marcas Pessoais & Boutiques de Luxo',
-    summary: 'Conjunto de monogramas e logotipos desenvolvidos com acabamento em folha metálica de ouro rosê sobre papéis finos de algodão.',
-    description: 'Estudo de marcas e símbolos autorais desenvolvido por Nívea Oliveira. O projeto foca em logomarcas que transmitem alta sofisticação através de linhas mínimas, proporções neoclássicas e contrastes sutis em tons rosê e dourado champanhe.',
-    challenge: 'Criar marcas femininas e contemporâneas sem cair no lugar-comum de tons saturados ou elementos decorativos supérfluos.',
-    solution: 'Paleta equilibrada entre o rosê suave e o ouro fosco, tipografia customizada com kerning editorial e testes de aplicação tátil.',
+    client: 'Identidade Pessoal & Atelier de Criação',
+    summary: 'Monograma autoral com as iniciais "NO" em folha de ouro texturizada com hot stamping, sobreposto pela assinatura caligráfica contínua em tom rosê suave.',
+    description: 'Identidade visual definitiva de Nívea Oliveira. O símbolo traz o monograma "NO" com acabamento em folha de ouro quente acetinado e textura metálica (#D4AF37), entrelaçado pela assinatura caligráfica em rosê contemporâneo (#E88B8C) com prolongamentos de linha horizontais que conferem equilíbrio e leveza editorial.',
+    challenge: 'Desenvolver uma marca pessoal atemporal que una autoridade artística, feminilidade sofisticada e versatilidade para aplicações em relevo seco, hot stamping e telas digitais.',
+    solution: 'Contraste harmônico entre o peso nobre da serifa romana em ouro e a fluidez orgânica da caligrafia em rosê suave sobre papel nobre.',
     deliverables: [
-      'Desenvolvimento de monogramas exclusivos',
-      'Versões vetoriais para impressão e telas (SVG/AI/PNG)',
-      'Simulações 3D de relevo e hot stamping rosê',
-      'Guia de aplicações mínimas e respiro de marca'
+      'Monograma e assinatura oficial vetorizada (SVG, AI, PNG)',
+      'Versões para marca d\'água translúcida e carimbo metálico',
+      'Guia de aplicação sobre papéis nobres e fundos claros/escuros',
+      'Assinatura de e-mail e papelaria institucional'
     ],
-    results: 'Adoção imediata por profissionais liberais de alto padrão e marcas de bem-estar.',
-    image: '/src/assets/images/showcase_rose_logos_1790951730858.jpg',
+    results: 'Símbolo principal adotado em todo o ecossistema de marca e comunicações do atelier.',
+    image: '/src/assets/images/logo_nivea_oliveira_transparente.png',
     featured: true
   },
   {

@@ -6,9 +6,22 @@ export interface LogoItem {
   concept: string;
   symbol: string; // SVG or glyph representation
   accent: 'rose' | 'gold' | 'champagne';
+  image?: string;
+  isOfficial?: boolean;
 }
 
 export const CURATED_LOGOS: LogoItem[] = [
+  {
+    id: 'logo-nivea-oliveira-oficial',
+    name: 'Nívea Oliveira — Monograma Ouro & Assinatura Rosé',
+    type: 'Monograma em Folha Dourada & Caligrafia Rosé',
+    segment: 'Identidade Pessoal & Atelier de Criação',
+    concept: 'Composição com as iniciais "NO" em serifa romana esculpida em textura de folha de ouro metálica (#D4AF37), sobreposta pela assinatura fluida "Nívea Oliveira" em caligrafia rosê suave (#E88B8C) com prolongamentos horizontais refinados.',
+    symbol: 'N·O',
+    accent: 'gold',
+    image: '/src/assets/images/logo_nivea_oliveira_transparente.png',
+    isOfficial: true
+  },
   {
     id: 'logo-atelier-no',
     name: 'Atelier Nívea Oliveira',
